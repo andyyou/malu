@@ -109,6 +109,7 @@
         padding-left: 200px;
         margin-left: 100px;
       }
+      #map_canvas { height: 100%; }
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -121,6 +122,10 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
     <script src="js/jquery-1.7.min.js"></script>
+    <script 
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyALXlSi129vzEIk2MaCnsPUBhi0cGskfmM&sensor=true">
+    </script>
+    <script src="js/google-map-infobox.js"></script>
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
@@ -141,21 +146,44 @@
               title: 'Malu &middot; 圓‧創藝和食'
         });
 
-        var infowindow = new google.maps.InfoWindow({
-          content: '<strong>Malu &middot; 圓‧創藝和食</strong><br />台北市114內湖區瑞光路583巷31號<br />電話:02-2658-6989',
-          size: new google.maps.Size(200, 200)
-        });
+      
+        
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "margin-top: 5px; background: #8b0d0d; padding: 5px;";
+        boxText.innerHTML = '<div style="font-size:0.9em;"><strong>Malu &middot; 圓‧創藝和食</strong><br />台北市114內湖區瑞光路583巷31號<br />電話:02-2658-6989</div>';
+                
+        var myOptions = {
+                 content: boxText
+                ,disableAutoPan: false
+                ,maxWidth: 0
+                ,pixelOffset: new google.maps.Size(-120, -120)
+                ,zIndex: null
+                ,boxStyle: { 
+                  background: "url('tipbox.gif') no-repeat"
+                  ,opacity: 0.75
+                  ,width: "240px"
+                 }
+                ,closeBoxMargin: "10px 2px 2px 2px"
+                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+                ,infoBoxClearance: new google.maps.Size(1, 1)
+                ,isHidden: false
+                ,pane: "floatPane"
+                ,enableEventPropagation: false
+        };
+
+        var ib = new InfoBox(myOptions);
+        ib.open(map, marker);
 
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
+            ib.open(map, marker);
           });
-          infowindow.open(map,marker);
+          ib.open(map, marker);
         }
     </script>
   </head>
 
-  <body>
-    <img src="img/logo.png" class="fixed-logo" />
+  <body onload="initialize()">
+    <img src="img/logo.png" class="fixed-logo visible-desktop" />
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -267,9 +295,8 @@
           </div>
           <div class="span3">
             <div class="sub-item">
-              <h4>聯絡資訊</h4>
-              <p>
-                <div id="map_canvas" style="width:100%; height:100%"></div>
+              
+                <div id="map_canvas" style="width:100%; height:100%;"></div>
 
               </p>
             </div>
@@ -323,9 +350,7 @@
     <script src="js/bootstrap-collapse.js"></script>
     <script src="js/bootstrap-carousel.js"></script>
     <script src="js/bootstrap-typeahead.js"></script>
-    <script 
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyALXlSi129vzEIk2MaCnsPUBhi0cGskfmM&sensor=true">
-    </script>
+    
     <script>
     $(function(){
       $('.carousel').carousel();
