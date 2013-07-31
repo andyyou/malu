@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Malu 圓‧創藝和食; 日本料理; 內湖;">
+    <meta name="author" content="Justin Cheng, Andy You" />
+    <title>Malu &middot; 圓‧創藝和食</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        padding-top: 45px; /* 60px to make the container go all the way to the bottom of the topbar */
+        background-image: url('img/bg.jpg');
+        background-color:black;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+      }
+      .navbar
+      {
+        font-family: 'Noticia Text', serif;
+        font-weight: 700;
+      }
+      .top-logo
+      {
+        position: fixed;
+        float: left;
+        top:0px;
+        left:140px;
+        z-index: 9999;
+      }
+      .darkness
+      {
+        background-color: hsla(0,100%,0%,0.4);
+        height: 48px;
+        display: block;
+      }
+      .sub-item
+      {
+        font-family: 'Noticia Text', serif;
+        color:#fff;
+        background-color: hsla(0,100%,0%,0.7);
+        width:100%;
+        height: 100%;
+        margin-top: 20px;
+        height: 300px;
+        padding-top: 5px;
+        padding-left: 5px;
+      }
+      
+      /* MULTI-LEVEL DROPDOWNS FOR BOOTSTRAP */
+      .dropdown-menu .sub-menu {
+          left: 100%;
+          position: absolute;
+          top: 0;
+          visibility: hidden;
+          margin-top: -1px;
+      }
+      
+      .dropdown-menu li:hover .sub-menu {
+          visibility: visible;
+          display: block;
+      }
+      
+      .navbar .sub-menu:before {
+          border-bottom: 7px solid transparent;
+          border-left: none;
+          border-right: 7px solid rgba(0, 0, 0, 0.2);
+          border-top: 7px solid transparent;
+          left: -7px;
+          top: 10px;
+      }
+      .navbar .sub-menu:after {
+          border-top: 6px solid transparent;
+          border-left: none;
+          border-right: 6px solid #fff;
+          border-bottom: 6px solid transparent;
+          left: 10px;
+          top: 11px;
+          left: -6px;
+      }
+      .footer
+      {
+        background-color: hsla(0,100%,0%,0.6);
+        margin-top:10px;
+        height:100px;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: #ccc;
+        font-family: 'Noticia Text', serif;
+        padding-top: 30px;
+
+      }
+      .fixed-logo
+      {
+        position: absolute;
+        top:0;
+        left:150px;
+        z-index: 9999;
+
+      }
+      .brand
+      {
+        padding-left: 200px;
+        margin-left: 100px;
+      }
+      #map_canvas { height: 100%; }
+      .news a
+      {
+        color:#c4a5ef;
+      }
+      .news a:hover
+      {
+        color:#fff;
+      }
+      ul li
+      {
+        list-style: none;
+      }
+      .masonry-item {
+              background-color: hsla(0,100%,0%,0.5);
+              color:#eee;
+              padding:5px;
+              margin-top:5px; 
+              border-bottom: 1px solid #666;
+              display: block;
+      }
+      .masonry-item:hover
+      {
+        background-color: rgba(0,0,0,0.8);
+        z-index: 9999;
+        -webkit-transform:scale(1.05);-moz-transform:scale(1.05);-o-transform:scale(1.05);-ms-transform:scale(1.05);
+        -webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out
+      }
+      .masonry-item a
+      {
+        color: #f08741;
+      }
+       .masonry-item a:hover
+      {
+        color: #a1c4fa;
+      }
+      .masonry-item.w2 {
+            width:28%;
+            margin:2px;
+      }
+        /* clearfix */
+      .masonry:after {
+            content: '';
+            display: block;
+            clear: both;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="css/colorbox.css" rel="stylesheet" />
+
+    <script src="js/jquery-1.7.min.js"></script>
+   
+  </head>
+
+  <body onload="initialize()">
+    <a href="index.html"><img src="img/logo.png" class="fixed-logo visible-desktop" /></a>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="span1"></div>
+          <a class="brand" href="#">MULA</a>
+         
+          <div class="nav-collapse collapse pull-right">
+            <ul class="nav">
+              <li><a href="index.html">首頁</a></li>
+              <li><a href="news.html">最新消息</a></li>
+              <li><a href="about.html">關於我們</a></li>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">菜單<b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="#">定食 <i class="icon-chevron-right" style="margin-top:5px;"></i></a>
+                    <ul class="dropdown-menu sub-menu">
+                      <li><a href="#">圓定食</a></li>
+                      <li><a href="#">藝定食</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">御膳 <i class="icon-chevron-right" style="margin-top:5px;"></i></a>
+                    <ul class="dropdown-menu sub-menu">
+                      <li><a href="#">榆 御膳</a></li>
+                      <li><a href="#">榭 御膳</a></li>
+                      <li><a href="#">槐 御膳</a></li>
+                      <li><a href="#">MaLu 御膳</a></li>
+                    </ul>
+
+                  </li>
+                  <li><a href="#">精進素膳</a></li>
+                  <li><a href="#">兒童御膳</a></li>
+                  <li><a href="#">單品料理</a></li>
+                </ul>
+              </li>
+              <li><a href="#">客製服務</a></li>
+              <li><a href="http://partner.eztable.com/booking.php?page_name=malutaipei">線上訂位</a></li>
+              <li><a href="mailto:service@malutaipei.com">聯絡我們</a></li>
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="span4 offset2 inline darkness pull-right">
+          <h4 style="color:#949eff;margin:10px; font-family: 'Noticia Text', serif; font-weight:700;">最新消息</h4>
+        </div>
+      </div>
+    <div class="container" id="news">
+      
+      <div class="row">
+        <div class="span10 offset2">
+          <ul id="masonry">
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s1.jpg" title="分享愛‧愛分享【父親節‧七夕情人節套餐活動】" class="colorbox"><img class="img-rounded" src='news/img/sn1.jpg' /></a>
+                <h5><a href="#">分享愛‧愛分享【父親節‧七夕情人節套餐活動】</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s2.jpg" title="週一相揪逗陣來MaLu一起喝必魯" class="colorbox"><img class="img-rounded" src='news/img/sn2.jpg' /></a>
+                <h5><a href="#">週一相揪逗陣來MaLu一起喝必魯</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s3.jpg" title="先生免費‧弟子享優惠【謝師專案】" class="colorbox"><img class="img-rounded" src='news/img/sn3.jpg' /></a>
+                <h5><a href="#">先生免費‧弟子享優惠【謝師專案】</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s1.jpg" title="分享愛‧愛分享【父親節‧七夕情人節套餐活動】" class="colorbox"><img class="img-rounded" src='news/img/sn1.jpg' /></a>
+                <h5><a href="#">分享愛‧愛分享【父親節‧七夕情人節套餐活動】</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s2.jpg" title="週一相揪逗陣來MaLu一起喝必魯" class="colorbox"><img class="img-rounded" src='news/img/sn2.jpg' /></a>
+                <h5><a href="#">週一相揪逗陣來MaLu一起喝必魯</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s3.jpg" title="先生免費‧弟子享優惠【謝師專案】" class="colorbox"><img class="img-rounded" src='news/img/sn3.jpg' /></a>
+                <h5><a href="#">先生免費‧弟子享優惠【謝師專案】</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s1.jpg" title="分享愛‧愛分享【父親節‧七夕情人節套餐活動】" class="colorbox"><img class="img-rounded" src='news/img/sn1.jpg' /></a>
+                <h5><a href="#">分享愛‧愛分享【父親節‧七夕情人節套餐活動】</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s2.jpg" title="週一相揪逗陣來MaLu一起喝必魯" class="colorbox"><img class="img-rounded" src='news/img/sn2.jpg' /></a>
+                <h5><a href="#">週一相揪逗陣來MaLu一起喝必魯</a></h5>
+              </div>
+            </li><!-- /single news-->
+            <!-- single news-->
+            <li class="masonry-item span2">
+              <div class="thumbbox">
+                <a href="news/img/s3.jpg" title="先生免費‧弟子享優惠【謝師專案】" class="colorbox"><img class="img-rounded" src='news/img/sn3.jpg' /></a>
+                <h5><a href="#">先生免費‧弟子享優惠【謝師專案】</a></h5>
+              </div>
+            </li><!-- /single news-->
+
+          </ul>
+          
+        </div>
+      </div>
+      
+    </div><!-- /container -->
+
+
+    <!-- footer -->
+     <div class="container">
+      <div class="row">
+          <div class="span9 offset1">
+            <div class="footer">
+              <div class="row">
+                <div class="span6">
+                地址:台北市114內湖區瑞光路583巷31號　　電話:02-2658-6989
+                <div class="pull-right inline">
+                    <a href="https://www.facebook.com/Malutaipei"><i class="icon-facebook-sign icon-2x"></i></a>
+                    <a href="https://plus.google.com/101364160389552477623/about?rfmt=s&hl=zh-TW&gl=tw"><i class="icon-google-plus-sign icon-2x"></i></a>
+                    
+                    <div class="span1"></div>
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="span6">
+                  <a href="#">Malu &middot; 圓‧創藝和食</a> 版權所有 © 2023 by Mula All rights ​reserved.  <a href="mailto:service@malutaipei.com">  <i class="icon-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!--/footer-->
+     </div><!-- /container -->
+    
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/jquery.colorbox-min.js"></script>
+    <script>
+    $(function(){
+      $('.carousel').carousel();
+      var container = document.querySelector('#masonry');
+      var msnry = new Masonry( container, {
+            // options
+            itemSelector: '.masonry-item'
+      });
+      $(".colorbox").colorbox({rel:'group'});
+    });
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Malu 圓‧創藝和食; 日本料理; 內湖;">
+    <meta name="author" content="Justin Cheng, Andy You" />
+    <title>Malu &middot; 圓‧創藝和食</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700&subset=latin,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        background-image: url('img/bg.jpg');
+        background-color:black;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+      }
+      .navbar
+      {
+        font-family: 'Noticia Text', serif;
+        font-weight: 700;
+      }
+      .top-logo
+      {
+        position: fixed;
+        float: left;
+        top:0px;
+        left:140px;
+        z-index: 9999;
+      }
+      .darkness
+      {
+        background-color: hsla(0,100%,0%,0.4);
+        height: 480px;
+        display: block;
+      }
+      .sub-item
+      {
+        font-family: 'Noticia Text', serif;
+        color:#fff;
+        background-color: hsla(0,100%,0%,0.7);
+        width:100%;
+        height: 100%;
+        margin-top: 20px;
+        height: 300px;
+        padding-top: 5px;
+        padding-left: 5px;
+      }
+      
+      /* MULTI-LEVEL DROPDOWNS FOR BOOTSTRAP */
+      .dropdown-menu .sub-menu {
+          left: 100%;
+          position: absolute;
+          top: 0;
+          visibility: hidden;
+          margin-top: -1px;
+      }
+      
+      .dropdown-menu li:hover .sub-menu {
+          visibility: visible;
+          display: block;
+      }
+      
+      .navbar .sub-menu:before {
+          border-bottom: 7px solid transparent;
+          border-left: none;
+          border-right: 7px solid rgba(0, 0, 0, 0.2);
+          border-top: 7px solid transparent;
+          left: -7px;
+          top: 10px;
+      }
+      .navbar .sub-menu:after {
+          border-top: 6px solid transparent;
+          border-left: none;
+          border-right: 6px solid #fff;
+          border-bottom: 6px solid transparent;
+          left: 10px;
+          top: 11px;
+          left: -6px;
+      }
+      .footer
+      {
+        background-color: hsla(0,100%,0%,0.6);
+        margin-top:10px;
+        height:100px;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: #ccc;
+        font-family: 'Noticia Text', serif;
+        padding-top: 30px;
+
+      }
+      .fixed-logo
+      {
+        position: absolute;
+        top:0;
+        left:150px;
+        z-index: 9999;
+
+      }
+      .brand
+      {
+        padding-left: 200px;
+        margin-left: 100px;
+      }
+      #map_canvas { height: 100%; }
+      .news a
+      {
+        color:#c4a5ef;
+      }
+      .news a:hover
+      {
+        color:#fff;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <script src="js/jquery-1.7.min.js"></script>
+    <script 
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyALXlSi129vzEIk2MaCnsPUBhi0cGskfmM&sensor=true">
+    </script>
+    <script src="js/google-map-infobox.js"></script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(25.080846904550672,121.56790426697921),
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+       
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+        var styles = [{ stylers: [{ invert_lightness: true }] }];
+        map.setOptions({styles: styles});
+        
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(25.080846904550672,121.56790426697921),
+              map: map, 
+              title: 'Malu &middot; 圓‧創藝和食'
+        });
+
+      
+        
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "margin-top: 5px; background: #8b0d0d; padding: 5px;";
+        boxText.innerHTML = '<div style="font-size:0.9em;"><strong>Malu &middot; 圓‧創藝和食</strong><br />台北市114內湖區瑞光路583巷31號<br />電話:02-2658-6989</div>';
+                
+        var myOptions = {
+                 content: boxText
+                ,disableAutoPan: false
+                ,maxWidth: 0
+                ,pixelOffset: new google.maps.Size(-120, -120)
+                ,zIndex: null
+                ,boxStyle: { 
+                  background: "url('tipbox.gif') no-repeat"
+                  ,opacity: 0.75
+                  ,width: "240px"
+                 }
+                ,closeBoxMargin: "10px 2px 2px 2px"
+                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+                ,infoBoxClearance: new google.maps.Size(1, 1)
+                ,isHidden: false
+                ,pane: "floatPane"
+                ,enableEventPropagation: false
+        };
+
+        var ib = new InfoBox(myOptions);
+        ib.open(map, marker);
+
+        google.maps.event.addListener(marker, 'click', function() {
+            ib.open(map, marker);
+          });
+          ib.open(map, marker);
+        }
+    </script>
+  </head>
+
+  <body onload="initialize()">
+    <a href="index.html"><img src="img/logo.png" class="fixed-logo visible-desktop" /></a>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="span1"></div>
+          <a class="brand" href="#">MULA</a>
+         
+          <div class="nav-collapse collapse pull-right">
+            <ul class="nav">
+              <li><a href="#">首頁</a></li>
+              <li><a href="#">最新消息</a></li>
+              <li><a href="#">關於我們</a></li>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">菜單<b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="#">定食 <i class="icon-chevron-right" style="margin-top:5px;"></i></a>
+                    <ul class="dropdown-menu sub-menu">
+                      <li><a href="#">圓定食</a></li>
+                      <li><a href="#">藝定食</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">御膳 <i class="icon-chevron-right" style="margin-top:5px;"></i></a>
+                    <ul class="dropdown-menu sub-menu">
+                      <li><a href="#">榆 御膳</a></li>
+                      <li><a href="#">榭 御膳</a></li>
+                      <li><a href="#">槐 御膳</a></li>
+                      <li><a href="#">MaLu 御膳</a></li>
+                    </ul>
+
+                  </li>
+                  <li><a href="#">精進素膳</a></li>
+                  <li><a href="#">兒童御膳</a></li>
+                  <li><a href="#">單品料理</a></li>
+                </ul>
+              </li>
+              <li><a href="#">客製服務</a></li>
+              <li><a href="http://partner.eztable.com/booking.php?page_name=malutaipei">線上訂位</a></li>
+              <li><a href="mailto:service@malutaipei.com">聯絡我們</a></li>
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+      <div class="span9 offset1">
+      <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+          <li data-target="#mCarousel" data-slide-to="0"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+      <!-- Carousel items -->
+        <div class="carousel-inner">
+        <div class="item active">
+          <img src="img/slides/1.jpg" />
+          <div class="carousel-caption">
+            <h4>老船長的故事</h4>
+            <p>八旬的老船長，一生與大海搏感情，堅持將最好的漁獲帶回港邊。早期，日本料理對漁家子弟而言，是種非常奢華的享受。生鮮的海鮮食材，通常在市場喧鬧的叫賣聲中，成為他人賺取利潤的商品，對於老船長及家人而言，買賣漁獲只是為了生計，鮮少成為飯桌上滿足味蕾的食材。如今，孫子幫老船長圓了一個夢，有了間充滿感情的日式料理餐廳，能夠將最新鮮、養生的美食分享給大家，更讓來店享受的賓客們有回到自己家的感覺，舒服而自在。</p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/slides/2.jpg" />
+          <div class="carousel-caption">
+            <h4>用餐意境</h4>
+            <p>本店裝潢以木質為基調，搭配日式禪意風格，結合「圓喜藝術中心」的蘇州繡畫、水墨畫以及油畫，傳達圓一個喜，分享尋寶的喜悅，是一種富足和幸福的理念。讓賓客蒞臨店裡用餐時，不僅能夠享受本店如同藝術品般的精緻美食外，更能有視覺上的豐富感受、心靈上的沉澱洗禮。</p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/slides/3.jpg" />
+          <div class="carousel-caption">
+            <h4>環境介紹</h4>
+            <p>本店一樓及二樓共設計約80個座位。一樓部分，有日式吧檯專區、半開放用餐空間以及沙發座椅區，並設置水晶燈藝術包廂乙間。二樓則有大、小兩間藝術包廂，並配置高級多媒體電視及投影布幕，可供會議及活動使用。</p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/slides/4.jpg" />
+          <div class="carousel-caption">
+            <h4>食材</h4>
+            <p>本店海鮮食材精選來自宜蘭南方澳、頭城大溪漁港及基隆崁仔頂漁市當日新鮮現撈漁獲、日本空運來台高級食材，以及產地直送、有機栽種之當令蔬果。</p>
+          </div>
+        </div>
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+      </div><!-- /span9 -->
+      </div>
+    </div> <!-- /container -->
+    
+    <div class="darkness">
+      <div class="container">
+        <div class="row">
+          <div class="span3 offset1">
+            <div class="sub-item">
+              <h4>最新消息</h4>
+              <p>
+                <ul class="news">
+                  <li><a href="#">分享愛‧愛分享【父親節‧七夕情人節套餐活動】</a></li>
+                  <li><a href="#">分享愛‧愛分享【父親節‧七夕情人節套餐活動】</a></li>
+
+                </ul>
+              </p>
+            </div>
+          </div>
+          <div class="span3">
+            <div class="sub-item">
+              
+                <div id="map_canvas" style="width:100%; height:100%;"></div>
+
+              </p>
+            </div>
+          </div>
+           <div class="span3">
+            <div class="sub-item">
+              <h4>營業時間</h4>
+              <p>
+                <div class="row">
+                <sapn class="span6">星期一 至 星期五 12:00 ~ 22:00</sapn></div>
+                <div class="row"><sapn class="span12">星期六 至 星期日 12:00 ~ 23:00</sapn></div>
+                <div class="row">
+                  <div class="span12">
+                    <h4><a href="http://partner.eztable.com/booking.php?page_name=malutaipei"><span class="label label-important"> <i class="icon-chevron-right"></i>  即刻訂位</span></a></h4>
+                  </div>
+                </div>
+              </p>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span9 offset1">
+            <div class="footer">
+              <div class="row">
+                <div class="span6">
+                地址:台北市114內湖區瑞光路583巷31號　　電話:02-2658-6989
+                <div class="pull-right inline">
+                    <a href="https://www.facebook.com/Malutaipei"><i class="icon-facebook-sign icon-2x"></i></a>
+                    <a href="https://plus.google.com/101364160389552477623/about?rfmt=s&hl=zh-TW&gl=tw"><i class="icon-google-plus-sign icon-2x"></i></a>
+                    
+                    <div class="span1"></div>
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="span6">
+                  <a href="#">Malu &middot; 圓‧創藝和食</a> 版權所有 © 2023 by Mula All rights ​reserved.  <a href="mailto:service@malutaipei.com">  <i class="icon-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    
+    <script>
+    $(function(){
+      $('.carousel').carousel();
+    });
+
+
+    </script>
+  </body>
+</html>
